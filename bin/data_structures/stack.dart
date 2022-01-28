@@ -3,6 +3,8 @@ class Stack<E> {
 
   Stack() : _storage = <E>[];
 
+  Stack.of(Iterable<E> elements) : _storage = List<E>.of(elements);
+
   void push(E element) => _storage.add(element);
 
   E pop() => _storage.removeLast();
@@ -16,13 +18,10 @@ class Stack<E> {
 }
 
 void main() {
-  final Stack<int> stack = Stack<int>();
-  stack.push(1);
-  stack.push(2);
-  stack.push(3);
-  stack.push(4);
-  print(stack);
+  const List<String> list = ['S', 'M', 'O', 'K', 'E'];
+  final Stack<String> smokeStack = Stack.of(list);
 
-  final int element = stack.pop();
+  print(smokeStack);
+  final String element = smokeStack.pop();
   print('Popped: $element');
 }
