@@ -9,8 +9,9 @@ Dart project to implements Algorithms and Data Structures.
 
 # Data Structures
 
-- Linked List
-- Binary Tree
+- [Stack](./bin/data_structures/stack.dart)
+- [Linked List](./bin/data_structures/linked_list.dart)
+- [Binary Tree](./bin/data_structures/binary_tree.dart)
 
 ---
 # Developers
