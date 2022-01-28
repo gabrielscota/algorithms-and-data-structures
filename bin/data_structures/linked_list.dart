@@ -1,50 +1,81 @@
-class Node {
-  final int data;
-  late Node? next;
+class Node<T> {
+  late T value;
+  late Node<T>? next;
 
   Node({
-    required this.data,
+    required this.value,
     this.next,
   });
 
-  Node? insert(Node? head, int value) {
-    if (head == null) {
-      return Node(data: value);
-    }
+  @override
+  String toString() {
+    if (next == null) return '$value';
+    return '$value -> ${next.toString()}';
+  }
+}
 
-    head.next = insert(head.next, value);
-    return head;
+class LinkedList<E> {
+  Node<E>? head;
+  Node<E>? tail;
+
+  bool get isEmpty => head == null;
+
+  void push(E value) {
+    head = Node(value: value, next: head);
+    tail ??= head;
   }
 
-  void printList(Node? head, {bool isReversed = false}) {
-    if (head == null) {
+  void append(E value) {
+    if (isEmpty) {
+      push(value);
       return;
     }
 
-    if (isReversed) {
-      printList(head.next, isReversed: isReversed);
-      print(head.data);
-    } else {
-      print(head.data);
-      printList(head.next);
+    tail!.next = Node(value: value);
+
+    tail = tail!.next;
+  }
+
+  Node<E>? nodeAt(int index) {
+    Node<E>? currentNode = head;
+    int currentIndex = 0;
+
+    while (currentNode != null && currentIndex < index) {
+      currentNode = currentNode.next;
+      currentIndex += 1;
     }
+    return currentNode;
+  }
+
+  Node<E> insertAfter(Node<E> node, E value) {
+    if (tail == node) {
+      append(value);
+      return tail!;
+    }
+
+    node.next = Node(value: value, next: node.next);
+    return node.next!;
+  }
+
+  @override
+  String toString() {
+    if (isEmpty) return 'Empty list';
+    return head.toString();
   }
 }
 
 void main() {
-  Node list = Node(data: 2);
-  Node? head = list;
+  final LinkedList<int> list = LinkedList<int>();
+  list.push(3);
+  list.push(2);
+  list.append(6);
+  list.push(1);
+  list.append(9);
 
-  list.insert(head, 6);
-  list.insert(head, 1);
-  list.insert(head, 3);
-  list.insert(head, 9);
-  list.insert(head, 5);
-  list.insert(head, 4);
-  list.insert(head, 7);
+  print('Before: $list');
 
-  print('\n--- Linked List ---');
-  list.printList(head);
-  print('\n--- Reversed Linked List ---');
-  list.printList(head, isReversed: true);
+  Node<int> middleNode = list.nodeAt(1)!;
+  list.insertAfter(middleNode, 42);
+
+  print('After:  $list');
 }
