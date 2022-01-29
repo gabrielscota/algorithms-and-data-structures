@@ -1,10 +1,4 @@
-extension SwappableList<E> on List<E> {
-  void swap(int indexA, int indexB) {
-    final E temp = this[indexA];
-    this[indexA] = this[indexB];
-    this[indexB] = temp;
-  }
-}
+import 'extensions/extensions.dart';
 
 void bubbleSort<E extends Comparable<dynamic>>(List<E> list) {
   for (int end = list.length - 1; end > 0; end--) {
