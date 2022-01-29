@@ -5,6 +5,7 @@ Dart project to implements Algorithms and Data Structures.
 ---
 # Algorithms
 
+- [Bubble Sort](./bin/algorithms/bubble_sort.dart)
 - 
 
 # Data Structures
